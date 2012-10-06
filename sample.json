@@ -1,4 +1,4 @@
-
+callback({ 'name' : 'taro', 'age' : '14' });
 
 
 

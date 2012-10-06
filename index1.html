@@ -1,26 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-  <title>jsonの情報を取得。jQueryを使わない方法。</title>
-  <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <title>jsonの情報の取得。jQueryを使わない場合</title>
 </head>
-
 <body>
-
 	
+	
+	
+	
+	
+	<script>
+		
+		function getJsondata()
+		{
+			//callback関数を定義する。関数外でcallbackが定義されていても大丈夫。
+			this.callback = function(data)
+			{
+				//ここで手に入れた情報を取得できる。引数user_dataにはいっている。
+				console.log(data);
+			}
+			
+			//イベントリスナーを設置するし、DOMが終わったら、scriptTagを実行する。
+			getJsondata.prototype.useragent();
+			
+		}
+		
+		//scriptタグを埋め込むメソッド
+		getJsondata.prototype.scriptTag = function()
+		{
+			//jsonファイルを読み込むためのスクリプトタグを埋め込む。
+			var target = document.createElement('script');
+			target.charset = 'utf-8';
+			target.src = "sample.json";
+			document.body.appendChild(target);     
+		}
+		
+		//useragentを判定し、DOMContentLoadedのイベントを設置する。
+		getJsondata.prototype.useragent = function()
+		{
+			var userAgent = window.navigator.userAgent.toLowerCase();
+			var scriptTagMethod = getJsondata.prototype.scriptTag;
+			if (userAgent.indexOf('msie') != -1)
+			{
+				window.attachEvent("onload",scriptTagMethod);
+			}
+			else
+			{
+				document.addEventListener("DOMContentLoaded",scriptTagMethod,true);
+			}
+		}
+		
+		//ここでメソッドを実行する。
+		getJsondata();
+		
+		
 
-<script>
 
-
-
-
-
-
-
-
-
-
-</script>
+	</script>
 
 </body>
 </html>
