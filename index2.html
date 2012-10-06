@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>jsonの情報の取得。jQueryを使わない場合。</title>
+</head>
+<body>
+	
+	
+	
+	
+	
+	<script>
+		
+		//GetJsondataのクラスをつくる。
+		GetJsondata = function()
+		{
+			this.global = window;
+			//jsonファイルのファイルのパス。
+			this.url = "sample.json";
+			
+			//callback関数を定義する。
+			this.global.callback = function(json)
+			{
+				console.log(json);
+			}
+			
+			this.start = function()
+			{
+				//useragentメソッドを実行する。
+				this.useragent();
+			}
+			
+		}
+		
+		//scriptタグを埋め込むためのメソッド。
+		GetJsondata.prototype.scriptTag = function()
+		{
+			//jsonファイルを読み込むためのスクリプトタグを埋め込む。
+			var target = document.createElement('script');
+			target.charset = 'utf-8';
+			target.src = this.url ;
+			document.body.appendChild(target);    
+		}
+		
+		//DOM構築ツリーが終了してから行うメソッド。
+		GetJsondata.prototype.useragent = function()
+		{
+			var userAgent = window.navigator.userAgent.toLowerCase();
+			if (userAgent.indexOf('msie') != -1)
+			{
+				window.attachEvent("onload",this.scriptTag());
+			}
+			else
+			{
+				document.addEventListener("DOMContentLoaded",this.scriptTag(),true);
+			}
+		
+		}
+		
+		//GetJsondatのクラスのオブジェクトを取得する。
+		var getJsondata = new GetJsondata();
+		//startメソッドを実行する。
+		getJsondata.start();
+		
+		
+
+	</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
